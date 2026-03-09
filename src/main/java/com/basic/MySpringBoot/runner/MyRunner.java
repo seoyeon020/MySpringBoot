@@ -1,5 +1,7 @@
 package com.basic.MySpringBoot.runner;
 
+import ch.qos.logback.core.util.SystemInfo;
+import com.basic.MySpringBoot.config.CustomerVO;
 import com.basic.MySpringBoot.property.MyBootProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,8 +27,13 @@ public class MyRunner implements ApplicationRunner {
     @Autowired
     private MyBootProperties properties;
 
+    @Autowired
+    private CustomerVO customerVO;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        System.out.println("현재 활성화된 CustomerVO = " + customerVO);
+
         System.out.println("MyBootProperties getName() = " + properties.getName());
 
         System.out.println("${myboot.name} = " + name);

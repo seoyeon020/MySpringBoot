@@ -1,6 +1,5 @@
 package com.basic.MySpringBoot.runner;
 
-import ch.qos.logback.core.util.SystemInfo;
 import com.basic.MySpringBoot.config.CustomerVO;
 import com.basic.MySpringBoot.property.MyBootProperties;
 import org.slf4j.Logger;
@@ -37,12 +36,15 @@ public class MyRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        System.out.println("Logger 구현체 클래스명 = " + logger.getClass().getName());
         logger.info("현재 활성화된 CustomerVO = {}", customerVO);
         logger.info("MyBootProperties getName() = {}", properties.getName());
+        logger.info("MyBootProperties getFullName() = {}", properties.getFullName());
 
         logger.info("${myboot.name} = {}", name);
         logger.info("${myboot.age} = {}", age);
 
+        logger.debug("DEBUG 레벨");
         logger.debug("${myboot.fullName} = {}", environment.getProperty("myboot.fullName"));
         logger.debug("VM 아규먼트 foo : {}", args.containsOption("foo"));
         logger.debug("Program 아규먼트 bar : {}", args.containsOption("bar"));

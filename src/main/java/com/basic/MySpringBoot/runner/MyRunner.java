@@ -3,6 +3,8 @@ package com.basic.MySpringBoot.runner;
 import ch.qos.logback.core.util.SystemInfo;
 import com.basic.MySpringBoot.config.CustomerVO;
 import com.basic.MySpringBoot.property.MyBootProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -30,19 +32,20 @@ public class MyRunner implements ApplicationRunner {
     @Autowired
     private CustomerVO customerVO;
 
+    //loger 객체생성
+    private Logger logger = LoggerFactory.getLogger(MyRunner.class);
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("현재 활성화된 CustomerVO = " + customerVO);
+        logger.info("현재 활성화된 CustomerVO = {}", customerVO);
+        logger.info("MyBootProperties getName() = {}", properties.getName());
 
-        System.out.println("MyBootProperties getName() = " + properties.getName());
+        logger.info("${myboot.name} = {}", name);
+        logger.info("${myboot.age} = {}", age);
 
-        System.out.println("${myboot.name} = " + name);
-        System.out.println("${myboot.age} = " + age);
-
-        System.out.println("${myboot.fullName} = " + environment.getProperty("myboot.fullName"));
-
-        System.out.println("VM 아규먼트 foo :" + args.containsOption("foo"));
-        System.out.println("Program 아규먼트 bar :" + args.containsOption("bar"));
+        logger.debug("${myboot.fullName} = {}", environment.getProperty("myboot.fullName"));
+        logger.debug("VM 아규먼트 foo : {}", args.containsOption("foo"));
+        logger.debug("Program 아규먼트 bar : {}", args.containsOption("bar"));
 
 
         //Anonymous Inner Class

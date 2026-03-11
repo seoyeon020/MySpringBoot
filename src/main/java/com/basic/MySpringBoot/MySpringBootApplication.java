@@ -18,7 +18,7 @@ public class MySpringBootApplication {
 	}
 
     @Bean
-    public String Hello() {
+    public String hello() {
         System.out.println("====Spring Bean 입니다. ====");
         return "Hello Bean";
     }

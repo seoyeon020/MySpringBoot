@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,12 +33,14 @@ public class UserRestController {
     }
 
     //User 목록조회
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping
     public List<User> getUsers() {
         return userRepository.findAll();
     }
 
     //Id로 User 조회
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
         Optional<User> optionalUser = userRepository.findById(id);

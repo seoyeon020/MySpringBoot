@@ -64,7 +64,7 @@ public class MyRunner implements ApplicationRunner {
         args.getOptionNames()
                 .forEach( name -> System.out.println(name));
 
-        //Methoer Reference (메서드 레퍼런스)
+        //Method Reference (메서드 레퍼런스)
         args.getOptionNames()//Set<String>
                 .forEach(System.out::println);
     }
